@@ -1,0 +1,7 @@
+# --- Pixela User Creation Variables ---
+PIXELA_USERNAME = "name-surname" # choose your username for pixela
+PIXELA_TOKEN = "password123" # choose your password for pixela
+
+# --- Pixela Variables ---
+PIXELA_THANKS_CODE = ""
+PIXELA_PROFILE_PAGE = "https://pixe.la/@name-surname" # enter your Pixela Profile webpage link
