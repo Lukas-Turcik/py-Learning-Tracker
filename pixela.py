@@ -2,7 +2,9 @@ import requests
 import os
 import re
 from datetime import datetime as dtt
+from dotenv import load_dotenv
 
+load_dotenv() 
 USERNAME = os.environ["PIXELA_USERNAME"]
 TOKEN = os.environ["PIXELA_TOKEN"]
 THANKS_CODE = os.environ["PIXELA_THANKS_CODE"]
