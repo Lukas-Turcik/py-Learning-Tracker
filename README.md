@@ -53,7 +53,7 @@ The second section below the line contains the individual learning topics that y
 - Open the pixela.py file in your Python editor, uncomment the last line (create_user()) and run the code. You should see messages in your terminal that your User and Learning Tracker total graph was successfully created. This will also pin your Learning Tracker total graph to your Pixela profile page.
 - Comment out the last line in the pixela.py again, save and close the file.
 - Click on main.py to run the Learning Tracker app.
-- If you see this message in the console of the main.py: 'Please retry this request,' please repeat the action. Your request for some APIs will be rejected 25% of the time because you are not a Pixela supporter. I recommend becoming a Pixela supporter if you would like to use the Learning Tracker on daily basis (costs 1 EUR per month). 
+- If you see this message in the console of the main.py: 'Please retry this request,' please repeat the action. Your request for some APIs will be rejected 25% of the time because you are not a Pixela supporter. I recommend becoming a Pixela supporter if you would like to use the Learning Tracker on daily basis (costs 1 EUR per month). Don't forget to update the Pixela thanks code in the .env file in order to unlock limited Pixela features and disable the 25% APIs requests rejects.
 
 # Q&A: What's on your mind?
 **Q:** Your app is amazing, I would like to go on a date with you. Are you single?<br>
