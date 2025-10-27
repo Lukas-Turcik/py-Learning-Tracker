@@ -8,8 +8,8 @@ TOKEN = os.environ["PIXELA_TOKEN"]
 THANKS_CODE = os.environ["PIXELA_THANKS_CODE"]
 
 PIXELA_ENDPOINT = "https://pixe.la/v1/users"
-TOTAL_GRAPH_ID = "tr-trackertotal"
-
+TOTAL_GRAPH_NAME = "Learning Tracker"
+TOTAL_GRAPH_ID = "tr-learning-track"
 
 def create_user():
     user_params = {
@@ -24,7 +24,7 @@ def create_user():
     response = requests.post(url=PIXELA_ENDPOINT, json=user_params)
     print(f"Create user: {response.text}")
 
-    create_graph(TOTAL_GRAPH_ID)
+    create_graph(TOTAL_GRAPH_NAME)
 
 def to_graph_id(name: str) -> str:
     # Lowercase everything
