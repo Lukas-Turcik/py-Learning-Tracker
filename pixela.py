@@ -84,17 +84,19 @@ def get_graph_list(date: str) -> list:
 
     s = requests.Session()
     s.headers.update({"X-USER-TOKEN": TOKEN})
-
-    # 1) get all graph IDs
-    graphs = s.get(f"https://pixe.la/v1/users/{USERNAME}/graphs").json()["graphs"]
-
     hits = []
-    for g in graphs:
-        gid = g["id"]
-        r = s.get(f"https://pixe.la/v1/users/{USERNAME}/graphs/{gid}/{DATE}")
-        if r.status_code == 200 and gid.startswith("tr-"):
-            qty = r.json().get("quantity")
-            hits.append({"graphID": gid, "name": g.get("name"), "quantity": qty})
+    try: 
+        # 1) get all graph IDs
+        graphs = s.get(f"https://pixe.la/v1/users/{USERNAME}/graphs").json()["graphs"]
+
+        for g in graphs:
+            gid = g["id"]
+            r = s.get(f"https://pixe.la/v1/users/{USERNAME}/graphs/{gid}/{DATE}")
+            if r.status_code == 200 and gid.startswith("tr-"):
+                qty = r.json().get("quantity")
+                hits.append({"graphID": gid, "name": g.get("name"), "quantity": qty})
+    except:
+        pass
 
     return hits  # list of graphs that have a pixel on DATE
 
