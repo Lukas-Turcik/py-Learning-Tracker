@@ -1,4 +1,4 @@
-# Introducing Learning Tracker
+# Introducing the Learning Tracker
 **Turn your study time into motivation!**
 
 **Learning Tracker** is a Python-based GUI application, inspired by the [100 Days of Code](https://www.udemy.com/course/100-days-of-code/) online course, that lets you interact with your [Pixela](https://pixe.la/) profile.
@@ -38,13 +38,22 @@ The second section below the line contains the individual learning topics that y
 
 ## What and how gets to my Pixela page?
 - When creating a Pixela profile using the setup script from the installation and set-up section below, a TotalTracker graph is created that contains the sum of all the day's learnings.
-- For every new learning topic, a new Pixela graph is automatically created when uploading to Pixela.
+- For every new learning topic, a new Pixela graph is automatically created when uploading to Pixela (id starts with 'tr-' in order not to interfere with your existing graphs)
 - When clicking 'Upload to Pixela,' all graphs loaded as learning topics are getting a pixel for the day + TotalTracker graph gets a pixel as sum of all topics learned today
 - if you had 00:00 as learning time for the day, the Upload issues a delete pixel command for the topic or TotalTracker graph. This makes sure your statistics for learning topics are not distorted by uploading zeros for days when you don't learn the topic.
 - Before initiating the Pixela upload, you can enter a comment for the day when Uploading to Pixela. The comment is created only for the TotalTracker graph. It lets you capture e.g. a rating for the day or number of pages you read.
 
 # Installation and Setup
-- ddd
+- Download the entire project code to your computer and unzip files locally.
+- Install the following packages that are not part of the standard Python installation (which is also a pre-requisite of course) by running the code below in the Python terminal:
+    - pip install requests
+    - pip install pandas
+    - pip install python-dotenv
+- Enter your desired Pixela username and token (password) in the .env file
+- Open the pixela.py file in your Python editor, uncomment the last line (create_user()) and run the code. You should see messages in your terminal that your User and Learning Tracker total graph was successfully created. This will also pin your Learning Tracker total graph to your Pixela profile page.
+- Comment out the last line in the pixela.py again, save and close the file.
+- Click on main.py to run the Learning Tracker app.
+- If you see this message in the console of the main.py: 'Please retry this request,' please repeat the action. Your request for some APIs will be rejected 25% of the time because you are not a Pixela supporter. I recommend becoming a Pixela supporter if you would like to use the Learning Tracker on daily basis (costs 1 EUR per month). 
 
 # Q&A: What's on your mind?
 **Q:** Your app is amazing, I would like to go on a date with you. Are you single?<br>
