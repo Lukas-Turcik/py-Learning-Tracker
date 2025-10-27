@@ -96,7 +96,7 @@ def get_graph_list(date: str) -> list:
                 qty = r.json().get("quantity")
                 hits.append({"graphID": gid, "name": g.get("name"), "quantity": qty})
     except:
-        pass
+        print("get_graph_list: Please retry this request")
 
     return hits  # list of graphs that have a pixel on DATE
 
