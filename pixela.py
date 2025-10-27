@@ -92,7 +92,7 @@ def get_graph_list(date: str) -> list:
         for g in graphs:
             gid = g["id"]
             r = s.get(f"https://pixe.la/v1/users/{USERNAME}/graphs/{gid}/{DATE}")
-            if r.status_code == 200 and gid.startswith("tr-"):
+            if r.status_code == 200 and gid.startswith("tr-") and gid != TOTAL_GRAPH_ID:
                 qty = r.json().get("quantity")
                 hits.append({"graphID": gid, "name": g.get("name"), "quantity": qty})
     except:
