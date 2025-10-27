@@ -9,7 +9,7 @@ THANKS_CODE = os.environ["PIXELA_THANKS_CODE"]
 
 PIXELA_ENDPOINT = "https://pixe.la/v1/users"
 TOTAL_GRAPH_NAME = "Learning Tracker"
-TOTAL_GRAPH_ID = "tr-learning-track"
+TOTAL_GRAPH_ID = "tr-learning-trac"
 
 def create_user():
     user_params = {
