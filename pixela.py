@@ -19,12 +19,20 @@ def create_user():
     "notMinor": "yes",
     "thanksCode": THANKS_CODE
 }
-
     # POST
     response = requests.post(url=PIXELA_ENDPOINT, json=user_params)
     print(f"Create user: {response.text}")
 
     create_graph(TOTAL_GRAPH_NAME)
+    
+    # PIN The Learning Tracker Total graph
+    graph_config = {"pinnedGraphID": TOTAL_GRAPH_ID}
+
+    headers = {"X-USER-TOKEN": TOKEN}
+
+    user_endpoint = f"https://pixe.la/@{USERNAME}"
+    response = requests.put(url=user_endpoint, json=graph_config, headers=headers)
+    print(f"Pinned total Graph: {response.text}")
 
 def to_graph_id(name: str) -> str:
     # Lowercase everything
