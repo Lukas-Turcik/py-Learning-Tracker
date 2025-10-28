@@ -24,7 +24,7 @@ The second section below the line contains the individual learning topics that y
 
 ## Where do I get my learning topics from?
 - On running 'main.py', the app assumes Today as your learning day and reads the 'learning_topics.csv' file that expects the following content:<br>
-<img src="Screenshots/learning_topics.png" alt="App Screenshot" width="200">
+  <img src="Screenshots/learning_topics.png" alt="App Screenshot" width="200">
 
 - Only the topics with 'ACTIVE = Y' will be loaded. This lets you disable the topic after you finished learning it.
 - On top of that, the app loads a topic from your Pixela tracker graphs if you have a pixel for the current learning day in any of your tracker graphs. This lets you check or update learning for previous days.
