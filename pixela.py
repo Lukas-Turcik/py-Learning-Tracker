@@ -36,6 +36,19 @@ def create_user():
     response = requests.put(url=user_endpoint, json=graph_config, headers=headers)
     print(f"Pinned total Graph: {response.text}")
 
+def delete_user():
+    url = f"{PIXELA_ENDPOINT}/{USERNAME}"
+    headers = {"X-USER-TOKEN": TOKEN}
+
+    # Ask for confirmation
+    confirm = input(f"⚠️ Are you sure you want to delete the Pixela user '{USERNAME}'? (yes/no): ").strip().lower()
+
+    if confirm == "yes":
+        response = requests.delete(url, headers=headers)
+        print(response.text)
+    else:
+        print("❎ Deletion cancelled.")
+
 def to_graph_id(name: str) -> str:
     # Lowercase everything
     s = name.lower()
@@ -144,3 +157,4 @@ def delete_pixel(date: str, graph_id: str):
 
 # --- Pixela user and total tracker graph setup ---
 # create_user()
+# delete_user()
