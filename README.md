@@ -39,7 +39,7 @@ The second section below the line contains the individual learning topics that y
 
 ## What and how gets to my Pixela page?
 - When creating a Pixela profile using the setup script from the installation and set-up section below, a 'Learning Tracker' main graph is created that contains the sum of all the day's learnings.
-- For every new learning topic, a new Pixela graph is automatically created when uploading to Pixela (graph ID starts with 'tr-' in order not to interfere with your existing graphs). You can change the details of your graphs (e.g. color or timezone) in the create_graph() procedure in pixela.py file. 
+- For every new learning topic, a new Pixela graph is automatically created when uploading to Pixela (graph ID starts with 'tr-' in order not to interfere with your existing graphs). You can change the details of your graphs (e.g. color or timezone) in the create_graph() function in pixela.py file. 
 - When clicking 'Upload to Pixela,' all graphs loaded as learning topics are getting a pixel for the day + 'Learning Tracker' main graph gets a pixel as sum of all topics learned today. 
 - if you had 00:00 as learning time for the day, the Upload issues a delete pixel command for the topic or 'Learning Tracker' main graph. This makes sure your statistics for learning topics are not distorted by uploading zeros for days when you don't learn the topic.
 - Before initiating the Pixela upload, you can enter a comment for the day when Uploading to Pixela. The comment is created only for the 'Learning Tracker' main graph. It lets you capture e.g. a rating for the day or number of pages you read.
