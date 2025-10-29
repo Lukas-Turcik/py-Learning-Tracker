@@ -163,7 +163,7 @@ def delete_pixel(date: str, graph_id: str):
     response = requests.delete(url=endpoint, headers=headers)
     print(f"Delete pixel for {graph_id}: {response.text}")
 
-# --- Pixela user and total tracker graph setup ---
+# ---  Pixela user and total tracker graph setup  ---
 # create_user()
 # delete_user()
 # update_user_with_thanks_code()
