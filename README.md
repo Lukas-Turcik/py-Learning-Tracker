@@ -52,9 +52,9 @@ The second section below the line contains the individual learning topics that y
     - pip install python-dotenv
 - Enter your desired Pixela username and token (password) in the .env file. 
 - Enter your learning topics into learning_topics.csv file. 
-- Open the 'pixela.py' file in your Python editor, uncomment the last line (create_user()) and run the code. You should see messages in your terminal that your User and 'Learning Tracker' main graph was successfully created. This will also pin your 'Learning Tracker' main graph to your Pixela profile page.
+- Open the 'pixela.py' file in your Python editor, uncomment the  line (create_user()) and run the code. You should see messages in your terminal that your User and 'Learning Tracker' main graph was successfully created. This will also pin your 'Learning Tracker' main graph to your Pixela profile page.
 - Comment out the last line in the 'pixela.py' again, save and close the file.
 - Run `main.py` with Python to start the Learning Tracker app.
-- If you see this message in the console of the main.py: 'Please retry this request,' please repeat the action. Your request for some APIs will be rejected 25% of the time because you are not a Pixela supporter. I recommend becoming a Pixela supporter if you would like to use the Learning Tracker on daily basis (costs 1 EUR per month). Don't forget to update the Pixela thanks code in the .env file in order to unlock limited Pixela features and disable the 25% APIs requests rejects.
+- If you see this message in the console of the main.py: 'Please retry this request,' please repeat the action. Your request for some APIs will be rejected 25% of the time because you are not a Pixela supporter. I recommend becoming a Pixela supporter if you would like to use the Learning Tracker on daily basis (costs 1 EUR per month). Don't forget to update the Pixela thanks code in the .env file in order to unlock limited Pixela features and disable the 25% APIs requests rejects. After updating the.env file with your thanks-code, open the 'pixela.py' file, uncomment the line at the bottom with 'update_user_with_thanks_code()' and run the code. Your user is now a supporter with no restrictions. Don't forget to comment out the line in 'pixela.py' file again, save and close.
 
 Enjoy!

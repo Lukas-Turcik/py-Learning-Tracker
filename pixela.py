@@ -49,6 +49,14 @@ def delete_user():
     else:
         print("❎ Deletion cancelled.")
 
+def update_user_with_thanks_code():
+    url = f"{PIXELA_ENDPOINT}/{USERNAME}"
+    headers = {"X-USER-TOKEN": TOKEN}
+    data = {"thanksCode": THANKS_CODE}
+
+    response = requests.put(url, headers=headers, json=data)
+    print("Response:", response.text)
+
 def to_graph_id(name: str) -> str:
     # Lowercase everything
     s = name.lower()
@@ -158,3 +166,4 @@ def delete_pixel(date: str, graph_id: str):
 # --- Pixela user and total tracker graph setup ---
 # create_user()
 # delete_user()
+# update_user_with_thanks_code()
