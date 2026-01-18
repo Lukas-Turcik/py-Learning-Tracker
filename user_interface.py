@@ -6,6 +6,7 @@ from datetime import datetime as dtt
 from tkinter import simpledialog, messagebox
 import webbrowser
 import os
+import json
 
 # ---------------------------- CONSTANTS ------------------------------- #
 GREY = "#D3D3D3"
@@ -171,7 +172,14 @@ def create_gui(learning_date: str):
         if any_running():
             messagebox.showinfo("Learning in progress", "Stop all timers before uploading.")
             return
-        commentt = comment()
+        
+        commentt = json.dumps({
+        "time": dtt.now().strftime("%H:%M"),
+        "comment": str(comment())
+        }, ensure_ascii=False)
+
+	print(f"Coment: {commentt}")
+
         for key, value in counters.items():
             if value == 0:
                 try:
