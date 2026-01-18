@@ -178,7 +178,7 @@ def create_gui(learning_date: str):
         "comment": str(comment())
         }, ensure_ascii=False)
 
-	print(f"Coment: {commentt}")
+	print(f"Comment: {commentt}")
 
         for key, value in counters.items():
             if value == 0:
