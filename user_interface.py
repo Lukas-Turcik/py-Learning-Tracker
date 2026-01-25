@@ -18,6 +18,7 @@ current_topic: str | None = None   # <- only one timer allowed
 
 def create_gui(learning_date: str):
 
+    start_time = dtt.now().strftime("%H:%M")
     topics = []
     
     try:
@@ -174,11 +175,11 @@ def create_gui(learning_date: str):
             return
         
         commentt = json.dumps({
-        "time": dtt.now().strftime("%H:%M"),
+        "time": start_time + " - " + dtt.now().strftime("%H:%M"),
         "comment": str(comment())
         }, ensure_ascii=False)
 
-	print(f"Comment: {commentt}")
+        print(f"Comment: {commentt}")
 
         for key, value in counters.items():
             if value == 0:
