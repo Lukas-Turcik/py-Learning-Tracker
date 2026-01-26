@@ -42,7 +42,7 @@ The second section below the line contains the individual learning topics that y
 - For every new learning topic, a new Pixela graph is automatically created when uploading to Pixela (graph ID starts with 'tr-' in order not to interfere with your existing graphs). You can change the details of your graphs (e.g. color or timezone) in the create_graph() function in 'pixela.py' file. 
 - When clicking 'Upload to Pixela,' all graphs loaded as learning topics are getting a pixel for the day + 'Learning Tracker' main graph gets a pixel as sum of all topics learned today. 
 - if you had 00:00 as learning time for the day, the Upload issues a delete pixel command for the topic or 'Learning Tracker' main graph. This makes sure your statistics for learning topics are not distorted by uploading zeros for days when you don't learn the topic.
-- Before initiating the Pixela upload, you can enter a comment for the day when Uploading to Pixela. The comment is created only for the 'Learning Tracker' main graph. It lets you capture e.g. a rating for the day or number of pages you read. Together with the comment, a time of upload (in format HH:MM) is stored in the pixel optional data.
+- Before initiating the Pixela upload, you can enter a comment for the day when Uploading to Pixela. The comment is created only for the 'Learning Tracker' main graph. It lets you capture e.g. a rating for the day or number of pages you read. Together with the comment, the time of creation of the GUI (in format HH:MM) and the time of upload (in format HH:MM) is stored in the pixel optional data, e.g. 21:15 - 22:47. This let's you track the time of day of your learnings.
 
 # Installation and Setup
 - Download the entire project code to your computer and unzip files locally.
