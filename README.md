@@ -6,7 +6,7 @@ Its main purpose is to track, in minutes, how much time you spend on your learni
 
 With the Pixela visualization, you can spot your strongest learning days of the week or follow your progress over time — and see if it’s time to put in a bit of extra effort next week to make up for those recent party days.
 
-In the visualization, each “pixel” represents one day’s progress - learning time in minutes. This is an example of my learning tracker since July (I obviously had a very relaxing sommer 😎):
+In the visualization, each “pixel” represents one day’s progress - learning time in minutes. This is an example of my learning tracker since July (I obviously had a very relaxing summer 😎):
 
 <img src="Screenshots/Pixela.png" alt="App Screenshot" width="600"><br>
 
@@ -22,7 +22,8 @@ who want **measurable progress**, not just motivation.
 - 📁 CSV-based topic management
 - 🔄 Daily upload & update logic
 - 🧪 Error handling for missing or invalid data
-## Explain me the GUI
+
+## How the GUI works
 <img src="Screenshots/GUI.png" alt="App Screenshot" width="600"><br>
 The GUI has two sections divided by a line: <br>
 
@@ -63,17 +64,19 @@ The second section below the line contains the individual learning topics that y
 - REST API integration
 
 # Installation and Setup
-- Download the entire project code to your computer and unzip files locally.
+- Clone the repository or download the entire project code to your computer and unzip files locally.
 - Install the following packages that are not part of the standard Python installation (which is also a pre-requisite of course) by running the code below in the Python terminal:
     - pip install requests
     - pip install pandas
     - pip install python-dotenv
-- Enter your desired Pixela username and token (password) in the .env file. 
+- Rename the .env.example file to .env, then enter your desired Pixela username and token (password) in the .env file. 
 - Enter your learning topics into learning_topics.csv file. 
 - Open the 'pixela.py' file in your Python editor, uncomment the  line (create_user()) and run the code. You should see messages in your terminal that your User and 'Learning Tracker' main graph was successfully created. This will also pin your 'Learning Tracker' main graph to your Pixela profile page.
 - Comment out the last line in the 'pixela.py' again, save and close the file.
 - Run `main.py` with Python to start the Learning Tracker app.
-- If you see this message in the console of the main.py: 'Please retry this request,' please repeat the action. It's a feature of Pixela: your request for some APIs will be rejected 25% of the time because you are not a Pixela supporter. I recommend becoming a Pixela supporter if you would like to use the Learning Tracker on a daily basis (costs 1 EUR per month). After becoming a supporter, don't forget to update the Pixela thanks-code in the .env file in order to disable the 25% APIs requests rejects. After updating the .env file with your thanks-code you received via e-mail, open the 'pixela.py' file, uncomment the line at the bottom with 'update_user_with_thanks_code()' and run the code. Your user is now a supporter with no restrictions. Don't forget to comment out the line in 'pixela.py' file again, save and close.
+
+## Troubleshooting
+If you see this message in the console of the main.py: 'Please retry this request,' please repeat the action. It's a feature of Pixela: your request for some APIs will be rejected 25% of the time because you are not a Pixela supporter. I recommend becoming a Pixela supporter if you would like to use the Learning Tracker on a daily basis (costs 1 EUR per month). After becoming a supporter, don't forget to update the Pixela thanks-code in the .env file in order to disable the 25% APIs requests rejects. After updating the .env file with your thanks-code you received via e-mail, open the 'pixela.py' file, uncomment the line at the bottom with 'update_user_with_thanks_code()' and run the code. Your user is now a supporter with no restrictions. Don't forget to comment out the line in 'pixela.py' file again, save and close.
 
 # Why this project?
 
