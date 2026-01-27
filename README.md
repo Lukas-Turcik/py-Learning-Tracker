@@ -10,9 +10,18 @@ In the visualization, each “pixel” represents one day’s progress - learnin
 
 <img src="Screenshots/Pixela.png" alt="App Screenshot" width="600"><br>
 
+Built with Tkinter, Python, and API integration — designed for self-learners
+who want **measurable progress**, not just motivation.
+
 **Keep on learning! 🚀**
 
 # Features
+- ⏱ Track learning time per topic
+- 📊 Visualize progress using Pixela graphs
+- 🖥 Simple Tkinter GUI (no web setup required)
+- 📁 CSV-based topic management
+- 🔄 Daily upload & update logic
+- 🧪 Error handling for missing or invalid data
 ## Explain me the GUI
 <img src="Screenshots/GUI.png" alt="App Screenshot" width="600"><br>
 The GUI has two sections divided by a line: <br>
@@ -44,6 +53,15 @@ The second section below the line contains the individual learning topics that y
 - if you had 00:00 as learning time for the day, the Upload issues a delete pixel command for the topic or 'Learning Tracker' main graph. This makes sure your statistics for learning topics are not distorted by uploading zeros for days when you don't learn the topic.
 - Before initiating the Pixela upload, you can enter a comment for the day when Uploading to Pixela. The comment is created only for the 'Learning Tracker' main graph. It lets you capture e.g. a rating for the day or number of pages you read. Together with the comment, the time of creation of the GUI (in format HH:MM) and the time of upload (in format HH:MM) is stored in the pixel optional data, e.g. 21:15 - 22:47. This let's you track the time of day of your learnings.
 
+# Tech Stack
+
+- Python 3
+- Tkinter (GUI)
+- Pixela API (data visualization)
+- CSV file handling
+- Environment variables (.env)
+- REST API integration
+
 # Installation and Setup
 - Download the entire project code to your computer and unzip files locally.
 - Install the following packages that are not part of the standard Python installation (which is also a pre-requisite of course) by running the code below in the Python terminal:
@@ -56,5 +74,13 @@ The second section below the line contains the individual learning topics that y
 - Comment out the last line in the 'pixela.py' again, save and close the file.
 - Run `main.py` with Python to start the Learning Tracker app.
 - If you see this message in the console of the main.py: 'Please retry this request,' please repeat the action. It's a feature of Pixela: your request for some APIs will be rejected 25% of the time because you are not a Pixela supporter. I recommend becoming a Pixela supporter if you would like to use the Learning Tracker on a daily basis (costs 1 EUR per month). After becoming a supporter, don't forget to update the Pixela thanks-code in the .env file in order to disable the 25% APIs requests rejects. After updating the .env file with your thanks-code you received via e-mail, open the 'pixela.py' file, uncomment the line at the bottom with 'update_user_with_thanks_code()' and run the code. Your user is now a supporter with no restrictions. Don't forget to comment out the line in 'pixela.py' file again, save and close.
+
+# Why this project?
+
+I built this project to:
+- track my own daily learning consistently
+- practice GUI development in Python
+- work with external APIs
+- design a small but complete application from scratch
 
 Enjoy!
