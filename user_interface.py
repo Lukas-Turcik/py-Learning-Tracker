@@ -173,7 +173,6 @@ def create_gui(learning_date: str):
         return any(running.values())
 
     def upload():
-        nonlocal learning_started_at
         if any_running():
             messagebox.showinfo("Learning in progress", "Stop all timers before uploading.")
             return
@@ -204,7 +203,6 @@ def create_gui(learning_date: str):
                     return
 
         pixela.update_total_tracker(date_str, session)
-        learning_started_at = None  # next learning session this run gets a fresh start time
         messagebox.showinfo("Done", "Pixela upload executed.")
 
     # build UI
