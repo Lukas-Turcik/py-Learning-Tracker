@@ -1,6 +1,7 @@
 import requests
 import os
 import re
+import json
 from datetime import datetime as dtt
 from dotenv import load_dotenv
 
@@ -145,15 +146,54 @@ def add_pixel(graph_id: str, date: str, quantity: str, optional_data: str =""):
     response = requests.post(url=post_pixel_endpoint, json=post_pixel_config, headers=headers)
     print(f"Add pixel for {graph_id}: {response.text}")
 
-def update_total_tracker(date: str, optional_data: str = ""):
+def get_pixel_optional_data(graph_id: str, date: str) -> str:
+    endpoint = f"{PIXELA_ENDPOINT}/{USERNAME}/graphs/{graph_id}/{date}"
+    headers = {"X-USER-TOKEN": TOKEN}
+    try:
+        response = requests.get(url=endpoint, headers=headers)
+        if response.status_code == 200:
+            return response.json().get("optionalData", "") or ""
+    except Exception:
+        pass
+    return ""
+
+def merge_session(existing_optional_data: str, new_session: dict | None) -> str:
+    """Append new_session to the sessions already stored on the pixel.
+
+    Accepts the legacy single-object format ({"time":.., "comment":..}) and
+    upgrades it to a list. Sessions are keyed by their start time, so
+    re-uploading the same session (same start) replaces it rather than
+    creating a duplicate.
+    """
+    try:
+        data = json.loads(existing_optional_data) if existing_optional_data else []
+    except (json.JSONDecodeError, TypeError):
+        data = []
+    if isinstance(data, dict):          # legacy single-session format
+        data = [data]
+    elif not isinstance(data, list):
+        data = []
+
+    if new_session:
+        new_start = str(new_session.get("time", "")).split(" - ")[0].strip()
+        if new_start:
+            data = [s for s in data
+                    if not (isinstance(s, dict)
+                            and str(s.get("time", "")).split(" - ")[0].strip() == new_start)]
+        data.append(new_session)
+
+    return json.dumps(data, ensure_ascii=False)
+
+def update_total_tracker(date: str, new_session: dict | None = None):
     total_minutes = 0
     for graph in get_graph_list(date):
         total_minutes += int(graph["quantity"])
-    
+
     if total_minutes == 0:
-        delete_pixel(date,TOTAL_GRAPH_ID)
+        delete_pixel(date, TOTAL_GRAPH_ID)
     else:
-        add_pixel(TOTAL_GRAPH_ID,date,str(total_minutes),optional_data)
+        merged = merge_session(get_pixel_optional_data(TOTAL_GRAPH_ID, date), new_session)
+        add_pixel(TOTAL_GRAPH_ID, date, str(total_minutes), merged)
 
 def delete_pixel(date: str, graph_id: str):
     endpoint = f"https://pixe.la/v1/users/{USERNAME}/graphs/{graph_id}/{date}"

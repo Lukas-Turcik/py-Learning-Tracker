@@ -18,7 +18,7 @@ current_topic: str | None = None   # <- only one timer allowed
 
 def create_gui(learning_date: str):
 
-    start_time = dtt.now().strftime("%H:%M")
+    learning_started_at: str | None = None  # wall-clock time the first timer started this session
     topics = []
     
     try:
@@ -128,12 +128,15 @@ def create_gui(learning_date: str):
 
     def start(topic: str):
         global current_topic
+        nonlocal learning_started_at
         # Block if some other topic is already running
         if current_topic is not None and current_topic != topic:
             messagebox.showinfo("Timer running",
                                 f"'{current_topic}' is already running.\nStop it before starting another.")
             return
         if not running.get(topic, False):
+            if learning_started_at is None:
+                learning_started_at = dtt.now().strftime("%H:%M")
             set_running_state(topic, True)
             current_topic = topic
             # Disable all other Start buttons
@@ -170,33 +173,38 @@ def create_gui(learning_date: str):
         return any(running.values())
 
     def upload():
+        nonlocal learning_started_at
         if any_running():
             messagebox.showinfo("Learning in progress", "Stop all timers before uploading.")
             return
-        
-        commentt = json.dumps({
-        "time": start_time + " - " + dtt.now().strftime("%H:%M"),
-        "comment": str(comment())
-        }, ensure_ascii=False)
 
-        print(f"Comment: {commentt}")
+        # Time window for this learning session (empty if no timer ran this session)
+        window = (f"{learning_started_at} - {dtt.now().strftime('%H:%M')}"
+                  if learning_started_at else "")
+        session = {"time": window, "comment": str(comment())}
+
+        print(f"Session: {session}")
+
+        date_str = dtt.strptime(date_var.get(), "%d.%m.%Y").strftime("%Y%m%d")
 
         for key, value in counters.items():
-            if value == 0:
+            minutes = round(value / 60)
+            if minutes == 0:
                 try:
-                    pixela.delete_pixel(dtt.strptime(date_var.get(), "%d.%m.%Y").strftime("%Y%m%d"),pixela.to_graph_id(key))                    
+                    pixela.delete_pixel(date_str, pixela.to_graph_id(key))
                 except Exception as e:
                     messagebox.showerror("Upload failed", f"{e}")
-                    return  
+                    return
             else:
                 try:
                     pixela.create_graph(key)
-                    pixela.add_pixel(pixela.to_graph_id(key),dtt.strptime(date_var.get(), "%d.%m.%Y").strftime("%Y%m%d"),str(round(float(value/60))))
+                    pixela.add_pixel(pixela.to_graph_id(key), date_str, str(minutes))
                 except Exception as e:
                     messagebox.showerror("Upload failed", f"{e}")
-                    return                
+                    return
 
-        pixela.update_total_tracker(dtt.strptime(date_var.get(), "%d.%m.%Y").strftime("%Y%m%d"),commentt)    
+        pixela.update_total_tracker(date_str, session)
+        learning_started_at = None  # next learning session this run gets a fresh start time
         messagebox.showinfo("Done", "Pixela upload executed.")
 
     # build UI
