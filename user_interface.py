@@ -137,6 +137,8 @@ def create_gui(learning_date: str):
         if not running.get(topic, False):
             if learning_started_at is None:
                 learning_started_at = dtt.now().strftime("%H:%M")
+            print(f"Start: {dtt.now().strftime('%H:%M')}, {topic}, "
+                  f"{fmt_time(counters[topic])}")
             set_running_state(topic, True)
             current_topic = topic
             # Disable all other Start buttons
