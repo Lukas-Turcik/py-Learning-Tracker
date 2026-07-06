@@ -183,9 +183,10 @@ def create_gui(learning_date: str):
         if session_comment is None:   # user clicked Cancel -> abort the upload
             return
 
-        # Time window for this learning session (empty if no timer ran this session)
+        # Time window for this learning session; 'manual-entry' if no timer ran,
+        # so merge_session() can key on it and replace instead of duplicating
         window = (f"{learning_started_at} - {dtt.now().strftime('%H:%M')}"
-                  if learning_started_at else "")
+                  if learning_started_at else "manual-entry")
         session = {"time": window, "comment": session_comment}
 
         print(f"Session: {session}")
