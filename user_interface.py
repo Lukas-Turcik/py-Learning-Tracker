@@ -165,11 +165,11 @@ def create_gui(learning_date: str):
         day_total_var.set(fmt_time(total))
 
     def comment():
+        # Returns None if the user clicked Cancel, otherwise the entered text ("" if left empty)
         answer = simpledialog.askstring("Comment", "Please enter comment for today's learning:")
-        if answer:
-            return(answer)
-        else:
-            return ""
+        if answer is None:
+            return None
+        return answer
         
     def any_running() -> bool:
         return any(running.values())
@@ -179,10 +179,14 @@ def create_gui(learning_date: str):
             messagebox.showinfo("Learning in progress", "Stop all timers before uploading.")
             return
 
+        session_comment = comment()
+        if session_comment is None:   # user clicked Cancel -> abort the upload
+            return
+
         # Time window for this learning session (empty if no timer ran this session)
         window = (f"{learning_started_at} - {dtt.now().strftime('%H:%M')}"
                   if learning_started_at else "")
-        session = {"time": window, "comment": str(comment())}
+        session = {"time": window, "comment": session_comment}
 
         print(f"Session: {session}")
 
