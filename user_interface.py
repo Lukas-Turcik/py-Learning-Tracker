@@ -50,7 +50,10 @@ def create_gui(learning_date: str):
    
     # state
     counters: dict[str, int] = {}
-    running: dict[str, bool] = {}        
+    running: dict[str, bool] = {}
+    # Minutes already on Pixela when this GUI opened, per topic. Everything on
+    # top of that is what the current session recorded.
+    baseline_minutes: dict[str, int] = {}
   
 
     # widget refs
@@ -185,9 +188,16 @@ def create_gui(learning_date: str):
 
         # Time window for this learning session; 'manual-entry' if no timer ran,
         # so merge_session() can key on it and replace instead of duplicating
-        window = (f"{learning_started_at} - {dtt.now().strftime('%H:%M')}"
-                  if learning_started_at else "manual-entry")
-        session = {"time": window, "comment": session_comment}
+        time_window = (f"{learning_started_at} - {dtt.now().strftime('%H:%M')}"
+                       if learning_started_at else "manual-entry")
+        # Minutes recorded in this GUI session = everything on top of what was
+        # already on Pixela when the GUI opened (breaks make this shorter than
+        # the time window above)
+        session_minutes = sum(round(seconds / 60) - baseline_minutes.get(topic, 0)
+                              for topic, seconds in counters.items())
+        session = {"time": time_window,
+                   "minutes": session_minutes,
+                   "comment": session_comment}
 
         print(f"Session: {session}")
 
@@ -270,8 +280,12 @@ def create_gui(learning_date: str):
 
     link.bind("<Button-1>", open_link)
         
+    # Pre-fill the counters with what the day already has on Pixela and remember
+    # it as the baseline, so the upload can tell this session's minutes apart
+    # from the minutes of the day's earlier sessions
     for graph in pixela.get_graph_list(dtt.strptime(date_var.get(), "%d.%m.%Y").strftime("%Y%m%d")):
         counters[graph["name"]] = int(graph["quantity"]) * 60
+        baseline_minutes[graph["name"]] = int(graph["quantity"])
 
     
     def refresh_all_labels():
