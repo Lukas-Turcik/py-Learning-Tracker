@@ -200,9 +200,10 @@ def create_gui(learning_date: str):
         session_topic_minutes = {topic: round(seconds / 60) - baseline_minutes.get(topic, 0)
                                  for topic, seconds in counters.items()}
         session_minutes = sum(session_topic_minutes.values())
-        # Topics learned in this session, in the order they are shown in the GUI
-        session_topics = [topic for topic, minutes in session_topic_minutes.items()
-                          if minutes > 0]
+        # Topics learned in this session, comma-separated in the order they are
+        # shown in the GUI ("" if none)
+        session_topics = ", ".join(topic for topic, minutes in session_topic_minutes.items()
+                                   if minutes > 0)
         session = {"time": time_window,
                    "minutes": session_minutes,
                    "topics": session_topics,
