@@ -43,7 +43,11 @@ def create_gui(learning_date: str):
 
     date_var = tk.StringVar(value=learning_date)
 
-    for graph in pixela.get_graph_list(dtt.strptime(learning_date, "%d.%m.%Y").strftime("%Y%m%d")):
+    # Ask Pixela once which topics already have a pixel on this day; the list is
+    # reused below to pre-fill the counters
+    existing_graphs = pixela.get_graph_list(dtt.strptime(learning_date, "%d.%m.%Y").strftime("%Y%m%d"))
+
+    for graph in existing_graphs:
         print(f"Existing pixel for the learning day for the graph: {graph["name"]}")
         if graph["name"] not in topics:
             topics.append(graph["name"])
@@ -283,7 +287,7 @@ def create_gui(learning_date: str):
     # Pre-fill the counters with what the day already has on Pixela and remember
     # it as the baseline, so the upload can tell this session's minutes apart
     # from the minutes of the day's earlier sessions
-    for graph in pixela.get_graph_list(dtt.strptime(date_var.get(), "%d.%m.%Y").strftime("%Y%m%d")):
+    for graph in existing_graphs:
         counters[graph["name"]] = int(graph["quantity"]) * 60
         baseline_minutes[graph["name"]] = int(graph["quantity"])
 
