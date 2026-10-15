@@ -194,13 +194,18 @@ def create_gui(learning_date: str):
         # so merge_session() can key on it and replace instead of duplicating
         time_window = (f"{learning_started_at} - {dtt.now().strftime('%H:%M')}"
                        if learning_started_at else "manual-entry")
-        # Minutes recorded in this GUI session = everything on top of what was
-        # already on Pixela when the GUI opened (breaks make this shorter than
-        # the time window above)
-        session_minutes = sum(round(seconds / 60) - baseline_minutes.get(topic, 0)
-                              for topic, seconds in counters.items())
+        # Minutes recorded in this GUI session per topic = everything on top of
+        # what was already on Pixela when the GUI opened (breaks make the total
+        # shorter than the time window above)
+        session_topic_minutes = {topic: round(seconds / 60) - baseline_minutes.get(topic, 0)
+                                 for topic, seconds in counters.items()}
+        session_minutes = sum(session_topic_minutes.values())
+        # Topics learned in this session, in the order they are shown in the GUI
+        session_topics = [topic for topic, minutes in session_topic_minutes.items()
+                          if minutes > 0]
         session = {"time": time_window,
                    "minutes": session_minutes,
+                   "topics": session_topics,
                    "comment": session_comment}
 
         print(f"Session: {session}")
